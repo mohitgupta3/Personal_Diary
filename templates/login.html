@@ -1,0 +1,33 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+<h1>Login</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username }}<br>
+        {% for error in form.username.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password }}<br>
+        {% for error in form.password.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    {% if login_error != '' %}
+    <div class="alert alert-danger" role="alert">
+        {{ login_error }}
+    </div>
+    {% endif %}
+    <p>{{ form.submit(class_="btn btn-outline-primary btn-lg") }}</p>
+    <a href="/registration">Not a member? Register</a>
+</form>
+{% endblock %}

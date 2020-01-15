@@ -1,0 +1,35 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<div class="btn-group">
+    <a href="/add_event" class="btn btn-outline-primary btn-lg mb-4 rounded" role="button">Add new event</a>
+    {% if session['admin'] == 1 %}
+    <a href="/admin" class="btn btn-outline-primary btn-lg mb-4 ml-4 rounded" role="button">Statistics</a>
+    {% endif %}
+    <div class="dropdown">
+        <button class="btn btn-outline-primary dropdown-toggle btn-lg ml-4" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort events
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/sort/0">By date</a>
+            <a class="dropdown-item" href="/sort/1">Alphabetically</a>
+        </div>
+    </div>
+</div>
+{% for new in event %}
+<div class="jumbotron">
+    <p class="lead">{{ new['pub_date'] }}</p>
+    <h1 class="display-5">{{ new['title'] }}</h1>
+
+    {% if new["pic"] != '0' %}
+        <img src="{{ url_for('static', filename='img/{}'.format(new['pic'].filename.split("/")[-1])) }}" {{ 'width={} height={}'.format(1040 if new["pic"].size[0] > 1040 else new["pic"].size[0], 1040 / new["pic"].size[0] * new["pic"].size[1] if new["pic"].size[0] > 1040 else new["pic"].size[1]) }}>
+        <p></p>
+    {% endif %}
+
+    <p class="lead">{{ new['content'] }}</p>
+    <a href="/delete_event/{{new['nid']}}" class="btn btn-outline-primary btn-sm mt-4" role="button">Delete event</a>
+    <a href="/edit_event/{{new['nid']}}" class="btn btn-outline-primary btn-sm mt-4" role="button">Edit event</a>
+</div>
+{% endfor %}
+{% endblock %}

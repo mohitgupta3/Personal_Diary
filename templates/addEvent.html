@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{result}}</h1>
+<form action="" method="post" enctype="multipart/form-data" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.title.label }}
+        {{ form.title(class_="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.content.label }}
+        {{ form.content(class_="form-control") }}
+    </div>
+    {{ form.picture.label }}
+    {{ form.picture }}
+    {{ form.submit(class_="btn btn-outline-primary") }}
+</form>
+{% endblock %}

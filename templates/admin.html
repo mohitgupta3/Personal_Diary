@@ -1,0 +1,20 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Number of entries</th>
+    </tr>
+    </thead>
+    {% for i in names %}
+    <tr>
+        <td> {{ names[i] }}</td>
+        <td> {{ amount[i] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="/" class="btn btn-outline-primary mt-4" role="button">Home!</a>
+{% endblock %}
