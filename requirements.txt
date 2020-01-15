@@ -1,0 +1,10 @@
+datetime
+flask
+flask-wtf
+multiprocessing
+pillow
+pyaes
+sqlite3
+time
+webbrowser
+wtforms
