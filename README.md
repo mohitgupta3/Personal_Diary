@@ -25,4 +25,4 @@ It provides/will provide the following features:
 2. Hit *Run.cmd (windows) or Run.sh (ubuntu)* to start the application.
     or simply type *python Run.py (windows)* or *python3 Run.py (ubuntu)* in terminal and hit enter.
     
- It will run the application and open the diary application in your default browser.
+ It will run the application and open the diary application in your default browser after 3 seconds.
