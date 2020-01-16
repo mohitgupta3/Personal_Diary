@@ -4,6 +4,7 @@ flask-wtf
 multiprocessing
 pillow
 pyaes
+secrets
 sqlite3
 time
 webbrowser
