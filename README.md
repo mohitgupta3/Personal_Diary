@@ -9,6 +9,7 @@ It provides/will provide the following features:
 3. Statistics for all users. (Admin access only)
 4. Support for adding images with diary entries.
 5. AI driven auto text completion.
+6. Lets you set administrator password during installation.
 
 ### To start the project:
 1. Install all required packages mentioned in *requirements.txt* bu simply executing the following command in your terminal.
