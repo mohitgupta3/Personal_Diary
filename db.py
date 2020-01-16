@@ -24,19 +24,19 @@ class UsersModel:
         if row is None:
             self.init_table()
 
-    # def init_table(self):
-    #     cursor = self.connection.cursor()
-    #     cursor.execute('''CREATE TABLE IF NOT EXISTS users
-    #                         (id INTEGER PRIMARY KEY AUTOINCREMENT,
-    #                          user_name VARCHAR(50),
-    #                          password_hash VARCHAR(128),
-    #                          admin INTEGER
-    #                          )''')
-    #     cursor.execute('''INSERT INTO users (user_name, password_hash, admin)
-    #                       VALUES (?,?,?)''', ('admin', 'admin', 1))
+    def init_table(self):
+        cursor = self.connection.cursor()
+        cursor.execute('''CREATE TABLE IF NOT EXISTS users
+                            (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                             user_name VARCHAR(50),
+                             password_hash VARCHAR(128),
+                             admin INTEGER
+                             )''')
+        cursor.execute('''INSERT INTO users (user_name, password_hash, admin)
+                          VALUES (?,?,?)''', ('admin', 'admin', 1))
         
-    #     cursor.close()
-    #     self.connection.commit()
+        cursor.close()
+        self.connection.commit()
 
     def insert(self, user_name, password_hash):
         cursor = self.connection.cursor()
@@ -81,19 +81,19 @@ class EventModel:
         if row is None:
             self.init_table()
 
-    # def init_table(self):
-    #     cursor = self.connection.cursor()
-    #     cursor.execute('''CREATE TABLE IF NOT EXISTS event
-    #                         (id INTEGER PRIMARY KEY AUTOINCREMENT,
-    #                          title VARCHAR(500),
-    #                          content VARCHAR(2500),
-    #                          user_id INTEGER,
-    #                          pub_date INTEGER,
-    #                          pic VARCHAR(100)
-    #                          enckey VARCHAR(32)
-    #                          )''')
-    #     cursor.close()
-    #     self.connection.commit()
+    def init_table(self):
+        cursor = self.connection.cursor()
+        cursor.execute('''CREATE TABLE IF NOT EXISTS event
+                            (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                             title VARCHAR(500),
+                             content VARCHAR(2500),
+                             user_id INTEGER,
+                             pub_date INTEGER,
+                             pic VARCHAR(100)
+                             enckey VARCHAR(32)
+                             )''')
+        cursor.close()
+        self.connection.commit()
 
     def insert(self, title, content, user_id, pic, edit=None):
         key = cu.gen_key()
@@ -160,4 +160,3 @@ class EventModel:
         cursor.execute('''DELETE FROM event WHERE id = ?''', (str(event_id),))
         cursor.close()
         self.connection.commit()
-
