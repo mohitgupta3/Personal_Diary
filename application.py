@@ -28,39 +28,39 @@ def login():
             session['sort'] = 0
             return redirect('/')
         else:
-            login_error = 'Incorrect login or password!'
-    return render_template('login.html', title='Login Form', brand="Diary", form=form, login_error=login_error)
+            login_error = 'Invalid Login Cradentials.'
+    return render_template('login.html', title='My Diary', brand="Personal Diary", form=form, login_error=login_error)
 
 
 @app.route('/')
 def index():
     if "username" not in session:
         return redirect('/login')
-    Event = EventModel(db.get_connection())
-    all_Event = []
-    for i in Event.get_all(session['userid'], session['sort']):
-        all_Event.append({'pic': Image.open("static/img/" + i[5]) if i[5] != "0" else i[5], 'pub_date': datetime.fromtimestamp(i[4]).strftime('%d.%m.%Y %H:%M'),
+    event = EventModel(db.get_connection())
+    all_events = []
+    for i in event.get_all(session['userid'], session['sort']):
+        all_events.append({'pic': Image.open("static/img/" + i[5]) if i[5] != "0" else i[5], 'pub_date': datetime.fromtimestamp(i[4]).strftime('%d.%m.%Y %H:%M'),
                         'content': i[2], 'title': i[1], 'nid': i[0]})
-    return render_template('index.html', title='Personal Diary', Event=all_Event, Image=Image, os=os)
+    return render_template('index.html', title='Personal Diary', news=all_events, Image=Image, os=os)
 
 
 @app.route('/add_event', methods=['GET', 'POST'])
 def add_event():
     if "username" not in session:
         return redirect('/login')
-    Event = EventModel(db.get_connection())
+    event = EventModel(db.get_connection())
 
     global edit
     if not edit:
         form = EventForm()
     else:
-        form = EventForm(Event.get(edit))
+        form = EventForm(event.get(edit))
 
     if form.validate_on_submit():
-        Event.insert(form.title.data if form.title.data != '' else Event.get(edit)[1] if edit else "",
-                    form.content.data if form.content.data != '' else Event.get(edit)[2] if edit else "",
+        event.insert(form.title.data if form.title.data != '' else event.get(edit)[1] if edit else "",
+                    form.content.data if form.content.data != '' else event.get(edit)[2] if edit else "",
                     session['userid'],
-                    form.picture.data.filename if form.picture.has_file() else "0" if not edit else Event.get(edit)[5],
+                    form.picture.data.filename if form.picture.has_file() else "0" if not edit else event.get(edit)[5],
                     edit)
 
         print(form.picture.data.filename) if form.picture.has_file() else print("0")
@@ -77,20 +77,20 @@ def add_event():
     return render_template('addEvent.html', title='Personal Diary', form=form)
 
 
-@app.route('/delete_Event/<nid>')
+@app.route('/delete_event/<nid>')
 def delete(nid):
     if "username" not in session:
         return redirect('/login')
-    Event = EventModel(db.get_connection())
-    Event.delete(nid)
+    event = EventModel(db.get_connection())
+    event.delete(nid)
     return redirect('/')
 
 
-@app.route('/edit_Event/<nid>')
+@app.route('/edit_event/<nid>')
 def editEvent(nid):
     if "username" not in session:
         return redirect('/login')
-    Event = EventModel(db.get_connection())
+    event = EventModel(db.get_connection())
     global edit
     edit = nid
     return redirect("/add_event")
@@ -110,11 +110,11 @@ def register():
 @app.route('/admin')
 def admin():
     if "username" not in session or session['admin'] != 1:
-        flash('Access denied!', 'danger')
+        flash('Access is denied', 'danger')
         return redirect('/')
-    Event, users = EventModel(db.get_connection()), UsersModel(db.get_connection())
+    event, users = EventModel(db.get_connection()), UsersModel(db.get_connection())
     names, amount = {}, {}
-    for n in Event.get_all():
+    for n in event.get_all():
         if n[3] in amount:
             amount[n[3]] += 1
         else:
@@ -125,7 +125,7 @@ def admin():
 
 
 @app.route('/sort/<sort>')
-def sortedEvent(sort):
+def sortedevent(sort):
     if not "username" in session:
         return redirect('/login')
     session['sort'] = int(sort)
