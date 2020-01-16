@@ -89,16 +89,17 @@ class EventModel:
                              content VARCHAR(2500),
                              user_id INTEGER,
                              pub_date INTEGER,
-                             pic VARCHAR(100)
+                             pic VARCHAR(100),
                              enckey VARCHAR(32)
                              )''')
         cursor.close()
         self.connection.commit()
 
     def insert(self, title, content, user_id, pic, edit=None):
-        key = cu.gen_key()
-        title = cu.encrypt(title, key)
-        content = cu.encrypt(content, key)
+        key = cu.gen_key(self)
+        print(key)
+        title = cu.encrypt(self, title, key = key)
+        content = cu.encrypt(self, content, key = key)
         pub_date = round(datetime.timestamp(datetime.now()))
         if edit:
             event = EventModel(db.get_connection())
@@ -107,7 +108,8 @@ class EventModel:
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO event
                           (title, content, user_id, pub_date, pic, enckey)
-                          VALUES (?,?,?,?,?)''', (title, content, str(user_id), pub_date, pic, key))
+                          VALUES (?,?,?,?,?,?)''', (title, content, str(user_id), pub_date, pic, key))
+        print(key)
         order = ' ORDER BY pub_date DESC'
         cursor.execute("SELECT * FROM event WHERE user_id = ?" + order, (str(user_id),))
         cursor.close()
@@ -143,16 +145,16 @@ class EventModel:
             cursor.execute("SELECT * FROM event" + order)
         rows = cursor.fetchall()
         for row in rows:
-            title = row[0]
-            content = row[1]
-            uid = row[2]
-            pubdate = row[3]
-            pic = row[4]
-            key = row[5]
+            title = row[1]
+            content = row[2]
+            uid = row[3]
+            pubdate = row[4]
+            pic = row[5]
+            key = row[6]
 
             # Perform decryption...
-            title = cu.decrypt(title, key)
-            content = cu.decrypt(content, key)
+            title = cu.decrypt(self, title, key = key)
+            content = cu.decrypt(self, content, key = key)
         return rows
 
     def delete(self, event_id):
