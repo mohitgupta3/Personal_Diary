@@ -5,15 +5,15 @@ import application
 import sqlite3
 import os
 
-def prepare_db():
-    conn.execute('''CREATE TABLE IF NOT EXISTS users
+def prepare_db(connection):
+    connection.execute('''CREATE TABLE IF NOT EXISTS users
                                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 user_name VARCHAR(50),
                                 password_hash VARCHAR(128),
                                 admin INTEGER
                                 )''')
 
-    conn.execute('''CREATE TABLE IF NOT EXISTS event
+    connection.execute('''CREATE TABLE IF NOT EXISTS event
                                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 title VARCHAR(500),
                                 content VARCHAR(2500),
@@ -23,7 +23,7 @@ def prepare_db():
                                 enckey VARCHAR(32)
                                 )''')
 
-def create_admin():
+def create_admin(conn):
     admin_pass = input('Please create an admin password: ')
     admin_pass1 = input('Re-enter the admin password: ')
     if(admin_pass == admin_pass1):
@@ -39,8 +39,8 @@ def check_for_db():
         return
     else:
         conn = sqlite3.connect('events_base.db')
-        prepare_db()
-        create_admin()
+        prepare_db(conn)
+        create_admin(conn)
 
 def run_application():
     application.run()
