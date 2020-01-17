@@ -12,6 +12,9 @@ It provides/will provide the following features:
 6. Lets you set administrator password during installation.
 
 ### First Run:
+
+You need _python 3.6+_ to run this application.
+
 Perform the steps given below if you are running the application for the first time.
 1. Hit _Setup.cmd_ or type in the console
   For Windows:
@@ -25,15 +28,15 @@ python setup.py
  This will install all the dependencies and set up the admin account.
  
 ### To start the project:
-1. Install all required packages mentioned in *requirements.txt* by simply executing the following command in your terminal.
+1. Install required packages (if necessary) by simply executing the following command in your terminal.
    
   For Windows:
 ```
-    pip install -r requirements.txt
+    pip install <package-name>
 ```
   For Ubuntu:
 ```
-    pip3 install -r requirements.txt
+    pip3 install <package-name>
 ```
 
 2. Hit *Run.cmd (windows) or Run.sh (ubuntu)* to start the application.
