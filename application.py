@@ -29,7 +29,7 @@ def login():
             return redirect('/')
         else:
             login_error = 'Invalid Login Cradentials.'
-    return render_template('login.html', title='My Diary', brand="Personal Diary", form=form, login_error=login_error)
+    return render_template('login.html', title = 'My Diary', brand = "Personal Diary", form = form, login_error = login_error)
 
 
 @app.route('/')
@@ -41,10 +41,10 @@ def index():
     for i in event.get_all(session['userid'], session['sort']):
         all_events.append({'pic': Image.open("static/img/" + i[5]) if i[5] != "0" else i[5], 'pub_date': datetime.fromtimestamp(i[4]).strftime('%d.%m.%Y %H:%M'),
                         'content': i[2], 'title': i[1], 'nid': i[0]})
-    return render_template('index.html', title='Personal Diary', news=all_events, Image=Image, os=os)
+    return render_template('index.html', title = 'Personal Diary', events = all_events, Image = Image, os = os)
 
 
-@app.route('/add_event', methods=['GET', 'POST'])
+@app.route('/add_event', methods = ['GET', 'POST'])
 def add_event():
     if "username" not in session:
         return redirect('/login')
@@ -74,7 +74,7 @@ def add_event():
             edit = None
 
         return redirect('/')
-    return render_template('addEvent.html', title='Personal Diary', form=form)
+    return render_template('addEvent.html', title = 'Personal Diary', form = form)
 
 
 @app.route('/delete_event/<nid>')
