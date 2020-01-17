@@ -82,6 +82,6 @@ if __name__ == "__main__":
     run_app = mp.Process(name = 'run', target = stp.run_app)
     
     open_docs.start()
-    run_app.start()
+    run_app.start() 
 
     exit()
