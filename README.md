@@ -1,6 +1,6 @@
 # Personal_Diary
 
-### Note: This project is in runnable condition but some features are experimental or still under active development. Please report bugs in issues column.
+#### Note: This project is in runnable condition but some features are still experimental or still under active development. Please report bugs in the issues column.
 
 This is a simple personal diary application written in Python3 with flask.
 It provides/will provide the following features:
