@@ -2,7 +2,7 @@
 
 ### Note: This project is in intitial development phase.
 
-This is an AI driven personal diary application written in Python3 with flask.
+This is a simple personal diary application written in Python3 with flask.
 It provides/will provide the following features:
 1. Multiple accounts support with password protection.
 2. All entries are protected with AES 256-bit encryption.
