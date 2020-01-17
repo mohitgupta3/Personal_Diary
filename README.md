@@ -5,12 +5,25 @@
 This is a simple personal diary application written in Python3 with flask.
 It provides/will provide the following features:
 1. Multiple accounts support with password protection.
-2. All entries are protected with AES 256-bit encryption.
+2. All entries are protected with AES 256-bit encryption. _(under testing)_
 3. Statistics for all users. (Admin access only)
 4. Support for adding images with diary entries.
 5. AI driven auto text completion. _(future)_
 6. Lets you set administrator password during installation.
 
+### First Run:
+Perform the steps given below if you are running the application for the first time.
+1. Hit _Setup.cmd_ or type in the console
+  For Windows:
+```
+python setup.py
+```
+  For Ubuntu:
+ ```
+ python3 setup.py
+ ```
+ This will install all the dependencies and set up the admin account.
+ 
 ### To start the project:
 1. Install all required packages mentioned in *requirements.txt* by simply executing the following command in your terminal.
    
