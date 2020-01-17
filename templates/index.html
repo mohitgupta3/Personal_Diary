@@ -1,4 +1,4 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 <h1>{{title}}</h1>
@@ -17,7 +17,7 @@
         </div>
     </div>
 </div>
-{% for new in event %}
+{% for new in events %}
 <div class="jumbotron">
     <p class="lead">{{ new['pub_date'] }}</p>
     <h1 class="display-5">{{ new['title'] }}</h1>
