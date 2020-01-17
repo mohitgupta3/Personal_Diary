@@ -28,19 +28,17 @@ def create_admin(conn):
     admin_pass1 = input('Re-enter the admin password: ')
     if(admin_pass == admin_pass1):
         conn.execute('''INSERT INTO users (user_name, password_hash, admin)
-                          VALUES (?,?,?)''', ('admin', admin_pass, 1))
+                          VALUES (?,?,?)''', ('administrator', admin_pass, 1))
+        print('\n\tAdmin Username: administrator\nPassword: '+admin_pass)
     else:
         print('\n\tERROR!: Passwords mismatch. Please try again.\n')
         create_admin()
 
 def check_for_db():
-    if(os.path.exists('events_base.db')):
-        print('Database exists:')
-        return
-    else:
-        conn = sqlite3.connect('events_base.db')
-        prepare_db(conn)
-        create_admin(conn)
+    print('Checking for database...')
+    conn = sqlite3.connect('events_base.db')
+    prepare_db(conn)
+    create_admin(conn)
 
 def run_application():
     application.run()
@@ -50,7 +48,7 @@ def open_browser():
     webbrowser.open(url)
 
 if __name__ == '__main__':
-    print('\n\tChecking ')
+    print('\n\tStart... ')
     check_for_db()
 
     p0 = multiprocessing.Process(name = 'app', target = run_application)
