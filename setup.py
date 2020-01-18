@@ -22,6 +22,7 @@ class setup:
             os.system('pip install pyaes')
             os.system('pip install pillow')
             os.system('pip install datetime')
+            os.system('pip install win32com')
 
             print('\n\n\t[INFO] --> All packages are now installed')
 
