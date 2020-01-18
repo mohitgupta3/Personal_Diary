@@ -8,8 +8,9 @@ It provides/will provide the following features:
 2. All entries are protected with AES 256-bit encryption. _(under testing)_
 3. Statistics for all users. (Admin access only)
 4. Support for adding images with diary entries.
-5. AI driven auto text completion. _(future)_
-6. Lets you set administrator password during installation.
+5. Audio feedbacks.
+6. AI driven auto text completion. _(future)_
+7. Lets you set administrator password during installation.
 
 ### First Run:
 
