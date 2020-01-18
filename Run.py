@@ -19,6 +19,7 @@ def run_application():
     application.run()
 
 def open_browser():
+    time.sleep(6)
     url = 'http://127.0.0.1:8080/'
     webbrowser.open(url)
 
