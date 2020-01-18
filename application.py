@@ -92,6 +92,7 @@ def delete(nid):
         return redirect('/login')
     event = EventModel(db.get_connection())
     event.delete(nid)
+    speak('event deleted!')
     return redirect('/')
 
 
@@ -114,6 +115,7 @@ def register():
     if form.validate_on_submit():
         users = UsersModel(db.get_connection())
         users.insert(form.username.data, form.password.data)
+        speak('registration successful!')
         flash('You have successfully registered', 'success')
         return redirect('/login')
     return render_template('register.html', title='Registration', form=form)
@@ -140,6 +142,7 @@ def admin():
 def sortedevent(sort):
     if not "username" in session:
         return redirect('/login')
+    speak('Sorting events!')
     session['sort'] = int(sort)
     return redirect('/')
 
@@ -149,8 +152,8 @@ def logout():
     session.pop('username', None)
     session.pop('userid', None)
     session.pop('admin', None)
-    return redirect('/')
     speak('you have successfully logged out from the application')
+    return redirect('/')
 
 def run():
     os.system('title Personal diary application...')
