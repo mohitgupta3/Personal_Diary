@@ -5,14 +5,21 @@ from flask import Flask, session, redirect, flash, render_template, url_for, req
 from loginform import LoginForm
 from registerform import RegisterForm
 from PIL import Image
+import win32com.client
 import webbrowser
 import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 edit = None
+read = None
 db = DB()
 
+def speak(text, rate = 1):    
+        speak = win32com.client.Dispatch('Sapi.SpVoice')
+        speak.Volume = 100
+        speak.Rate = rate
+        speak.Speak(text)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -26,10 +33,12 @@ def login():
             session['username'] = users.get(user[1])[1]
             session['admin'] = users.get(user[1])[3]
             session['sort'] = 0
+            speak('Login approved!')
             return redirect('/')
         else:
             login_error = 'Invalid Login Cradentials.'
-    return render_template('login.html', title = 'My Diary', brand = "Personal Diary", form = form, login_error = login_error)
+            speak('Invalid Login Cradentials.')
+    return render_template('login.html', title='My Diary', brand="Personal Diary", form=form, login_error=login_error)
 
 
 @app.route('/')
@@ -41,10 +50,10 @@ def index():
     for i in event.get_all(session['userid'], session['sort']):
         all_events.append({'pic': Image.open("static/img/" + i[5]) if i[5] != "0" else i[5], 'pub_date': datetime.fromtimestamp(i[4]).strftime('%d.%m.%Y %H:%M'),
                         'content': i[2], 'title': i[1], 'nid': i[0]})
-    return render_template('index.html', title = 'Personal Diary', events = all_events, Image = Image, os = os)
+    return render_template('index.html', title='Personal Diary', events=all_events, Image=Image, os=os)
 
 
-@app.route('/add_event', methods = ['GET', 'POST'])
+@app.route('/add_event', methods=['GET', 'POST'])
 def add_event():
     if "username" not in session:
         return redirect('/login')
@@ -74,7 +83,7 @@ def add_event():
             edit = None
 
         return redirect('/')
-    return render_template('addEvent.html', title = 'Personal Diary', form = form)
+    return render_template('addEvent.html', title = 'Personal Diary', form=form)
 
 
 @app.route('/delete_event/<nid>')
@@ -95,6 +104,9 @@ def editEvent(nid):
     edit = nid
     return redirect("/add_event")
 
+def readEvent(event):
+    event = EventModel(db.get_connection())
+    speak(event)
 
 @app.route('/registration', methods=['GET', 'POST'])
 def register():
@@ -138,10 +150,12 @@ def logout():
     session.pop('userid', None)
     session.pop('admin', None)
     return redirect('/')
+    speak('you have successfully logged out from the application')
 
 def run():
     os.system('title Personal diary application...')
     os.system('cls')
+    speak('Please keep this window open to ensure smooth functioning of this application.')
     print('\n\tPlease keep this window open to ensure smooth functioning of this application...\n\n\tPress the (x) button on top of this window to exit the application.\n\n')
     app.run(port = 8080, host = '127.0.0.1')
 
