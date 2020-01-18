@@ -16,10 +16,10 @@ read = None
 db = DB()
 
 def speak(text, rate = 1):    
-        speak = win32com.client.Dispatch('Sapi.SpVoice')
-        speak.Volume = 100
-        speak.Rate = rate
-        speak.Speak(text)
+    speak = win32com.client.Dispatch('Sapi.SpVoice')
+    speak.Volume = 100
+    speak.Rate = rate
+    speak.Speak(text)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
