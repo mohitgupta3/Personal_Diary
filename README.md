@@ -1,3 +1,5 @@
+![Python 3.6](https://img.shields.io/badge/python-3.6-green.svg?style=plastic)
+![License AGPLv3](https://img.shields.io/badge/license-AGPLv3-green.svg?style=plastic)
 # Personal_Diary
 
 #### Note: _This project is in runnable condition but some features are still experimental or still under active development. Please report bugs in the issues column._
