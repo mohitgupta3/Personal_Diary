@@ -29,7 +29,9 @@ python setup.py
  python3 setup.py
  ```
  This will install all the dependencies and set up the admin account.
- 
+
+_Cross plateform support will be removed after january, 2020. Only windows operating system will be supported. however, application.py file will always be able to run on linux. We won't provide full support for any other OS than windows._
+
 ### To start the project:
 1. Install required packages (if necessary) by simply executing the following command in your terminal.
    
