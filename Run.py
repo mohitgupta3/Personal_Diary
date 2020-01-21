@@ -28,6 +28,8 @@ if __name__ == '__main__':
     
     dlt_setup()
 
+    os.system('mode con: cols=95 lines=35')
+
     p0 = multiprocessing.Process(name = 'app', target = run_application)
     p1 = multiprocessing.Process(name = 'web', target = open_browser)
     
