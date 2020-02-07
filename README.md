@@ -4,15 +4,15 @@
 
 #### Note: _This project is in runnable condition but some features are still experimental or still under active development. Please report bugs in the issues column._
 
-This is a simple personal diary application written in Python3 with flask.
-It provides/will provide the following features:
-1. Multiple accounts support with password protection.
-2. All entries are protected with AES 256-bit encryption. _(under testing)_
-3. Statistics for all users. (Admin access only)
-4. Support for adding images with diary entries.
-5. Audio feedbacks.
-6. AI driven auto text completion. _(future)_
-7. Lets you set administrator password during installation.
+> This is a simple personal diary application written in Python3 with flask.
+> It provides/will provide the following features:
+> 1. Multiple accounts support with password protection.
+> 2. All entries are protected with AES 256-bit encryption. _(under testing)_
+> 3. Statistics for all users. (Admin access only)
+> 4. Support for adding images with diary entries.
+> 5. Audio feedbacks.
+> 6. AI driven auto text completion. _(future)_
+> 7. Lets you set administrator password during installation.
 
 ### First Run:
 
